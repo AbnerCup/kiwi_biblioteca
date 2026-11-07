@@ -1,0 +1,4 @@
+---
+deployment:
+  tasks:
+    - /usr/bin/test -f .hosting-build && /usr/bin/test -s index.html && /usr/bin/test -d /home/metrdpex/kiwicorporacion.com && /bin/cp -R assets brand posters videos /home/metrdpex/kiwicorporacion.com/ && /bin/cp index.html /home/metrdpex/kiwicorporacion.com/index.html
