@@ -1,7 +1,16 @@
 # kiwi_biblioteca
 
 Base local: Vite + TypeScript + Tailwind CSS y motor scroll-world.
-Los textos actuales son un borrador; no incluye catálogo, precios ni pagos.
+Incluye catálogo conectado a PHP/MySQL, fichas de libros, búsqueda y filtros,
+pedidos por WhatsApp y panel privado en `/admin/`. No incluye pagos ni entrega de PDFs.
+Los libros y portadas se administran sin modificar el código.
+
+## Activar la administración
+
+Seguir [server/INSTALL.md](server/INSTALL.md) para crear la base de datos,
+importar el esquema, guardar la configuración privada fuera del directorio público
+y crear la cuenta del dueño. Hasta completar esos pasos, la web muestra un mensaje
+de catálogo no configurado. Subir solamente `dist/` no crea la base de datos.
 
 ## Desarrollo
 
@@ -16,7 +25,7 @@ npm run dev
 npm run build
 ```
 
-Subir el contenido de `dist/` a la carpeta raíz asignada al dominio o subdominio en cPanel. No subir node_modules ni los archivos de desarrollo. No requiere un proceso Node en el servidor.
+Subir el contenido de `dist/` a la carpeta raíz asignada al dominio o subdominio en cPanel. No subir node_modules ni los archivos de desarrollo. No requiere un proceso Node en el servidor. El catálogo y el panel necesitan PHP y MySQL configurados.
 
 Antes de publicar: confirmar nombre y marca, catálogo y portadas, precios y moneda, flujo de compra, datos de contacto y textos legales. Quitar noindex cuando la página final esté lista. Probar scroll, unión de clips y reproducción en Safari y móviles reales.
 

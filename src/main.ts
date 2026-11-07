@@ -1,5 +1,6 @@
 import './style.css';
 import { mountScrollWorld } from './scrub-engine.js';
+import { mountCatalog } from './catalog';
 
 const base = import.meta.env.BASE_URL;
 mountScrollWorld(document.querySelector('#world'), {
@@ -48,28 +49,15 @@ const catalog = document.querySelectorAll<HTMLElement>('.sw-copy')[1];
 if (catalog) {
   catalog.classList.add('kiwi-catalog');
   catalog.id = 'catalogo';
-  const samples = [
-    { title: 'Orgullo y prejuicio', author: 'Jane Austen', tone: 'sage', genre: 'Novela' },
-    { title: 'Don Quijote de la Mancha', author: 'Miguel de Cervantes', tone: 'sand', genre: 'Clásicos' },
-    { title: 'La metamorfosis', author: 'Franz Kafka', tone: 'pine', genre: 'Relatos' },
-    { title: 'Alicia en el país de las maravillas', author: 'Lewis Carroll', tone: 'rose', genre: 'Fantasía' },
-  ];
   catalog.innerHTML = `
     <span class="sw-copy__eyebrow">La estantería de Kiwi</span>
     <h2 class="sw-copy__title">Una historia para cada lector.</h2>
     <p class="sw-copy__body">Descubre tu próxima lectura. Libros físicos y PDFs en un mismo lugar.</p>
-    <p class="catalog-note">Selección de ejemplo. Títulos, formatos y disponibilidad por confirmar.</p>
-    <div class="book-grid">${samples.map((book, i) => `
-      <a class="book-card" href="#libro-${i}">
-        <div class="book-cover book-cover--${book.tone}"><span>KIWI · BIBLIOTECA</span><strong>${book.title}</strong><span>${book.author}</span></div>
-        <span class="book-genre">${book.genre}</span>
-        <h3>${book.title}</h3><p>${book.author}</p>
-        <span class="book-link">Ver libro ↗</span>
-      </a>`).join('')}</div>
+    <div class="book-grid" id="featured-books"></div>
     <a class="catalog-link" href="#seleccion-completa">Explorar la selección ↓</a>`;
   const details = document.createElement('section');
   details.className = 'catalog-details';
   details.id = 'seleccion-completa';
-  details.innerHTML = `<span class="sw-copy__eyebrow">Kiwi Coorporacion</span><h2>Explora la selección</h2><p>Estos títulos ilustran el diseño del catálogo. La oferta comercial se incorporará con sus portadas, precios y enlaces de pedido.</p>${samples.map((book, i) => `<article id="libro-${i}"><h3>${book.title}</h3><p>${book.author} · ${book.genre}</p><p>Disponibilidad y formatos por confirmar.</p><a href="#catalogo">Volver a los libros ↑</a></article>`).join('')}`;
   document.querySelector('main')?.appendChild(details);
+  void mountCatalog(catalog.querySelector<HTMLElement>('#featured-books')!, details);
 }

@@ -6,7 +6,7 @@ set -euo pipefail
 site_dir="$RUNNER_TEMP/kiwi-hosting"
 test ! -e "$site_dir"
 test -s dist/index.html
-for directory in assets brand posters videos; do
+for directory in assets brand posters videos api admin; do
   test -d "dist/$directory"
 done
 

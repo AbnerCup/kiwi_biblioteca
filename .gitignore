@@ -5,3 +5,6 @@ dist/
 !.env.example
 kiwi-namecheap.zip
 *.log
+kiwi-config.php
+kiwi-data/
+tests/.runtime/

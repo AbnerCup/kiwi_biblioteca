@@ -95,3 +95,65 @@ p { text-wrap: pretty; }
  .book-cover { aspect-ratio: 3/2.4; }
 }
 @media (prefers-reduced-motion:reduce) { .book-card { transition: none; } .book-card:hover { transform: none; } }
+
+/* Shared catalog and owner workspace. Manrope, existing Kiwi colors. */
+.real-cover { width: 100%; aspect-ratio: 3/4; object-fit: contain; background: #e9eddf; border-radius: 4px; display: block; }
+button.book-card { border: 1px solid #d6dfbd; text-align: left; font: inherit; cursor: pointer; width: 100%; }
+.book-card h3, .admin-book h3 { overflow-wrap: anywhere; }
+.catalog-filters, .form-pair { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; }
+.catalog-details .book-grid { max-width: 1200px; margin-inline: auto; }
+.catalog-details button { text-decoration: none; }
+.catalog-details a.button { text-decoration: none; }
+.button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 8px 12px; border: 1px solid #15382a; border-radius: 8px; color: #fff; background: #15382a; font: 600 16px/24px 'Manrope',sans-serif; text-decoration: none; cursor: pointer; transition: background-color 300ms cubic-bezier(.22,1,.36,1), transform 500ms cubic-bezier(.22,1,.36,1); }
+.button:hover { background: #375c2d; }
+.button:active { transform: scale(.98); }
+.button.secondary { color: #15382a; background: #e9eddf; border-color: #d6dfbd; }
+.button.secondary:hover { background: #d6dfbd; }
+.button:disabled { opacity: .6; cursor: wait; }
+.admin-body { background: #faf7f2; color: #15382a; font-size: 16px; line-height: 24px; }
+.admin-header { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin: 16px auto; padding: 16px 24px; width: calc(100% - 32px); max-width: 1200px; box-sizing: border-box; border: 1px solid #d6dfbd; border-radius: 16px; background: #ffffffd9; backdrop-filter: blur(16px); }
+.admin-header a { color: #15382a; font-size: 14px; line-height: 20px; font-weight: 600; }
+.admin-main { max-width: 1200px; margin: 48px auto; padding: 0 24px; }
+.admin-main h1 { font-size: 36px; line-height: 40px; font-weight: 600; margin: 8px 0 16px; }
+.admin-main h2, .book-dialog h2 { font-size: 24px; line-height: 32px; font-weight: 600; margin: 0 0 16px; }
+.admin-main h3 { font-size: 18px; line-height: 28px; font-weight: 600; margin: 0 0 8px; }
+.admin-main p { margin: 8px 0 16px; }
+.eyebrow { font-size: 12px; line-height: 16px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
+.panel { padding: 24px; border: 1px solid #d6dfbd; border-radius: 16px; background: #fff; margin-bottom: 24px; min-width: 0; }
+.admin-login { max-width: 480px; margin: 64px auto; }
+.admin-heading { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; }
+.admin-columns { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 24px; align-items: start; }
+.admin-main form { display: grid; gap: 24px; }
+label { display: grid; gap: 8px; font-size: 14px; line-height: 20px; font-weight: 500; min-width: 0; }
+input, select, textarea { box-sizing: border-box; width: 100%; min-width: 0; border: 1px solid #b4c2ad; border-radius: 8px; padding: 12px; background: #fff; color: #15382a; font: 400 16px/24px 'Manrope',sans-serif; }
+textarea { resize: vertical; }
+small, .form-help { font-size: 12px; line-height: 16px; font-weight: 400; color: #3f5446; }
+.check { display: flex; align-items: center; gap: 12px; }
+.check input { width: 24px; height: 24px; accent-color: #15382a; flex: none; }
+.admin-main .settings-form { grid-template-columns: minmax(0,1fr) auto; align-items: start; }
+.settings-form button { margin-top: 24px; }
+.admin-book { display: grid; grid-template-columns: 80px minmax(0,1fr); gap: 16px; padding: 16px 0; }
+.admin-book p { font-size: 14px; line-height: 20px; }
+.admin-book .book-cover { padding: 8px; aspect-ratio: 3/4; }
+.admin-book .book-cover strong { font-size: 12px; line-height: 16px; }
+.admin-book .book-cover span { display: none; }
+#cover-preview { max-width: 160px; }
+#cover-preview:empty { display: none; }
+#admin-status:not(:empty) { padding: 16px; background: #e9eddf; border-radius: 8px; }
+#admin-status.is-error { background: #f8e8e1; color: #7e2d20; }
+.book-dialog { border: 1px solid #d6dfbd; border-radius: 16px; padding: 24px; background: #faf7f2; color: #15382a; width: min(800px,calc(100% - 32px)); max-height: calc(100dvh - 32px); box-sizing: border-box; }
+.book-dialog::backdrop { background: #15382acc; }
+.dialog-close { display: flex; margin-left: auto; margin-bottom: 24px; }
+.book-detail { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,2fr); gap: 24px; }
+.book-description { white-space: pre-wrap; overflow-wrap: anywhere; }
+.loading-shelf { height: 240px; border-radius: 16px; background: #e9eddf; }
+@media(max-width:860px) {
+ .admin-columns, .catalog-filters, .admin-main .settings-form, .book-detail { grid-template-columns: minmax(0,1fr); }
+ .admin-main { padding: 0 16px; margin-top: 32px; }
+ .panel { padding: 16px; }
+ .admin-login { margin-top: 32px; }
+ .admin-main h1 { font-size: 30px; line-height: 36px; }
+ .settings-form button { margin-top: 0; }
+ .book-detail > .real-cover, .book-detail > .book-cover { max-width: 200px; }
+}
+@media(prefers-reduced-motion:reduce) { .button { transition: none; } .button:active { transform: none; } }
