@@ -1,4 +1,4 @@
 ---
 deployment:
   tasks:
-    - /usr/bin/test -f .hosting-build && /usr/bin/test -s index.html && /usr/bin/test -d /home/metrdpex/kiwicorporacion.com && /bin/cp -R assets brand posters videos /home/metrdpex/kiwicorporacion.com/ && /bin/cp index.html /home/metrdpex/kiwicorporacion.com/index.html && /bin/cp deploy-version.txt /home/metrdpex/kiwicorporacion.com/deploy-version.txt && /usr/local/cpanel/3rdparty/bin/git rev-parse HEAD > /home/metrdpex/.kiwi-deployed-sha
+    - /usr/bin/test -f .hosting-build && /usr/bin/test -s index.html && /usr/bin/test -d /home/metrdpex/kiwicorporacion.com && /bin/cp -R assets brand posters videos api admin /home/metrdpex/kiwicorporacion.com/ && /bin/cp index.html /home/metrdpex/kiwicorporacion.com/index.html && /bin/cp deploy-version.txt /home/metrdpex/kiwicorporacion.com/deploy-version.txt && /usr/local/cpanel/3rdparty/bin/git rev-parse HEAD > /home/metrdpex/.kiwi-deployed-sha
