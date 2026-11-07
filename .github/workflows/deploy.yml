@@ -33,6 +33,9 @@ jobs:
       - name: Compilar y comprobar TypeScript
         run: npm run build
 
+      - name: Identificar version publicada
+        run: printf '%s\n' "$GITHUB_SHA" > dist/deploy-version.txt
+
       - name: Actualizar rama hosting para cPanel
         run: bash .github/scripts/publish-hosting.sh
 

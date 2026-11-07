@@ -59,6 +59,8 @@ El script trae `hosting` desde GitHub y solicita el despliegue a cPanel solo si 
 
 Flujo: push a `main` > GitHub Actions genera `hosting` > cron detecta la version nueva > cPanel publica el sitio. El tiempo es la compilacion de GitHub mas hasta cinco minutos de espera y la duracion del despliegue. No configurar FTPS simultaneamente con esta tarea. Namecheap no permite intervalos menores a cinco minutos en hosting compartido.
 
+Para verificar la version publicada, abre `https://kiwicorporacion.com/deploy-version.txt`. Debe mostrar el SHA del commit de `main` que genero la compilacion. Este archivo permite probar el recorrido completo sin cambios visuales.
+
 ### FTPS opcional para publicacion automatica al servidor
 
 Si no hay secrets FTP, el workflow termina correctamente tras preparar `hosting` y omite FTPS. Si configuras los cuatro secrets, cada push a `main` tambien publica directamente en Namecheap. No configurar ambos metodos para escribir al sitio simultaneamente.
