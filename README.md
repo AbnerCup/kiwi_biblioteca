@@ -37,7 +37,7 @@ Las dos carpetas tienen funciones distintas y deben mantenerse separadas:
 
 1. Espera a que Actions termine correctamente y cree la rama `hosting` en GitHub.
 2. En cPanel > Git Version Control > kiwi_biblioteca > Manage, pulsa Update from Remote para obtener las ramas nuevas.
-3. En la seleccion de rama (Basic Information), cambia la rama activa de `main` a `hosting` usando Checkout. Si no aparece, vuelve a actualizar desde el remoto.
+3. En Basic Information > Checked-Out Branch, selecciona `hosting` y pulsa Update. Si no aparece, vuelve a actualizar desde el remoto.
 4. En Pull or Deploy pulsa Update from Remote y despues Deploy HEAD Commit.
 5. Abre el dominio y comprueba la web.
 
