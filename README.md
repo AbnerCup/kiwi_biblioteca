@@ -1,4 +1,4 @@
-# Librería
+# kiwi_biblioteca
 
 Base local: Vite + TypeScript + Tailwind CSS y motor scroll-world.
 Los textos actuales son un borrador; no incluye catálogo, precios ni pagos.
@@ -36,7 +36,7 @@ El workflow `.github/workflows/deploy.yml` compila el proyecto y publica `dist/`
 ```powershell
 git add .
 git commit -m "Preparar sitio y despliegue automatico"
-git remote add origin https://github.com/TU_USUARIO/kiwi.git
+git remote add origin https://github.com/AbnerCup/kiwi_biblioteca.git
 git push -u origin main
 ```
 
