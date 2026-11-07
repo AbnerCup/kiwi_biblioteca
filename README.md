@@ -26,9 +26,28 @@ Motor de scroll: oso95/scroll-world, licencia MIT en src/scroll-world-LICENSE.
 
 ## Repositorio y despliegue automatico
 
-El workflow `.github/workflows/deploy.yml` compila el proyecto y publica `dist/` en Namecheap cada vez que haces push a `main`. Tambien puedes ejecutarlo desde la pestana Actions con Run workflow. Las otras ramas no publican. Si la compilacion falla, no se suben archivos.
+El workflow `.github/workflows/deploy.yml` compila el proyecto cada vez que haces push a `main` y actualiza la rama `hosting` con la web lista para servir. Tambien puedes ejecutarlo desde Actions con Run workflow sobre `main`. Si la compilacion falla, no se actualiza `hosting`. No editar `hosting` directamente: se genera desde `main`.
 
-### Configuracion inicial
+### Publicar desde Git Version Control en cPanel
+
+Las dos carpetas tienen funciones distintas y deben mantenerse separadas:
+
+- Repositorio clonado: `/home/metrdpex/repositories/kiwi_biblioteca`.
+- Document Root del dominio: `/home/metrdpex/kiwicorporacion.com`.
+
+1. Espera a que Actions termine correctamente y cree la rama `hosting` en GitHub.
+2. En cPanel > Git Version Control > kiwi_biblioteca > Manage, pulsa Update from Remote para obtener las ramas nuevas.
+3. En la seleccion de rama (Basic Information), cambia la rama activa de `main` a `hosting` usando Checkout. Si no aparece, vuelve a actualizar desde el remoto.
+4. En Pull or Deploy pulsa Update from Remote y despues Deploy HEAD Commit.
+5. Abre el dominio y comprueba la web.
+
+`hosting` incluye `.cpanel.yml`, que copia `assets`, `brand`, `posters`, `videos` y finalmente `index.html` a la carpeta del dominio. No copia el codigo fuente, `.git` ni archivos de configuracion al sitio publico. Conserva `.well-known`, `cgi-bin` y otros archivos existentes. Los recursos antiguos pueden permanecer; no hay borrado ni cambio atomico de version.
+
+No hace falta Node en Namecheap: GitHub compila la web. No cambiar Document Root a la raiz del repositorio. La preparacion de `hosting` es automatica; para publicar en el servidor con este metodo hace falta Update from Remote + Deploy HEAD Commit. La clonacion por si sola no activa actualizaciones automaticas desde GitHub. Para automatizar tambien el servidor hay que configurar FTPS (abajo), o acceso SSH/una tarea cron de despliegue en cPanel.
+
+### FTPS opcional para publicacion automatica al servidor
+
+Si no hay secrets FTP, el workflow termina correctamente tras preparar `hosting` y omite FTPS. Si configuras los cuatro secrets, cada push a `main` tambien publica directamente en Namecheap. No configurar ambos metodos para escribir al sitio simultaneamente.
 
 1. Crea un repositorio vacio en GitHub, preferiblemente privado, sin README ni .gitignore adicionales.
 2. Conecta y sube este proyecto desde PowerShell, sustituyendo la URL:

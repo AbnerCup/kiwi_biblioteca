@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: namecheap-production
@@ -14,6 +14,7 @@ concurrency:
 
 jobs:
   deploy:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -32,13 +33,22 @@ jobs:
       - name: Compilar y comprobar TypeScript
         run: npm run build
 
+      - name: Actualizar rama hosting para cPanel
+        run: bash .github/scripts/publish-hosting.sh
+
       - name: Validar configuracion de despliegue
+        id: ftp
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
           FTP_SERVER_DIR: ${{ secrets.FTP_SERVER_DIR }}
         run: |
+          if [ -z "$FTP_SERVER$FTP_USERNAME$FTP_PASSWORD$FTP_SERVER_DIR" ]; then
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Rama hosting preparada. Publicar desde cPanel; FTPS opcional sin configurar."
+            exit 0
+          fi
           for name in FTP_SERVER FTP_USERNAME FTP_PASSWORD FTP_SERVER_DIR; do
             if [ -z "${!name}" ]; then
               echo "::error::Falta configurar el secret $name en Settings > Secrets and variables > Actions."
@@ -49,8 +59,10 @@ jobs:
             echo "::error::FTP_SERVER_DIR debe terminar en /."
             exit 1
           fi
+          echo "configured=true" >> "$GITHUB_OUTPUT"
 
       - name: Publicar dist por FTPS
+        if: steps.ftp.outputs.configured == 'true'
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: ${{ secrets.FTP_SERVER }}
