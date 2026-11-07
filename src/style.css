@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
+@import 'tailwindcss';
+
+:root {
+  font-family: 'Manrope', sans-serif;
+  --sw-bg: #181818;
+  --sw-ink: #ffffff;
+  --sw-ink-soft: #d6d6d6;
+  --sw-accent: #a9c596;
+  --sw-font-display: 'Manrope', sans-serif;
+  --sw-font-body: 'Manrope', sans-serif;
+}
+body { margin: 0; background: #181818; color: #ffffff; }
+h1, h2, h3 { text-wrap: balance; }
+p { text-wrap: pretty; }
+.skip { position: fixed; top: 16px; left: 16px; z-index: 1000; padding: 8px 12px; background: #ffffff; color: #181818; transform: translateY(-200%); }
+.skip:focus { transform: translateY(0); }
+:focus-visible { outline: 2px solid #a9c596; outline-offset: 4px; }
+
+.sw-root {
+  --sw-bg: #faf7f2;
+  --sw-ink: #15382a;
+  --sw-ink-soft: #3f5446;
+  --sw-accent: #87a843;
+  --sw-font-display: 'Manrope', sans-serif;
+  --sw-font-body: 'Manrope', sans-serif;
+}
+.sw-topbar { top: 16px; left: 24px; right: 24px; padding: 12px 24px; border-radius: 16px; background: #faf7f2f2; gap: 24px; }
+.sw-brand { display: block; width: 232px; max-width: 55vw; overflow: hidden; border-radius: 8px; }
+.sw-brand__logo { display: block; width: 100%; height: 72px; object-fit: cover; object-position: center 53%; }
+.sw-nav { background: #e9eddf; backdrop-filter: none; border: 0; padding: 4px; }
+.sw-nav__item { font-size: 14px; padding: 8px 12px; }
+.sw-nav__item.is-active { background: #15382a; }
+.sw-copy { width: min(44vw, 560px); }
+.kiwi-signature { width: min(100%, 440px); aspect-ratio: 3.2; overflow: hidden; border-radius: 8px; margin-bottom: 24px; background: #faf7f2; }
+.kiwi-signature img { width: 100%; height: 100%; object-fit: cover; object-position: center 53%; }
+.sw-copy__num { display: none; }
+.sw-copy__eyebrow { margin-top: 0; color: #375c2d; font-size: 12px; }
+.sw-copy__title { font-size: 60px; line-height: 1; font-weight: 600; max-width: 680px; }
+.sw-copy__body { font-size: 16px; line-height: 24px; }
+.sw-copy__tags li { background: #e9eddf; color: #15382a; border: 0; padding: 8px 12px; }
+@media (max-width: 860px) {
+  .sw-topbar { left: 12px; right: 12px; top: 12px; padding: 8px 16px; }
+  .sw-brand { width: 192px; max-width: 70vw; }
+  .sw-brand__logo { height: 56px; }
+  .sw-copy { width: auto; }
+  .kiwi-signature { width: 280px; max-width: 100%; margin-bottom: 16px; }
+  .sw-copy__title { font-size: 36px; line-height: 40px; }
+}
+@media (max-height: 600px) {
+  .kiwi-signature { display: none; }
+  .sw-copy__title { font-size: 30px; line-height: 36px; }
+  .sw-copy__tags { margin-top: 12px; }
+}
+.kiwi-catalog { left: 5%; right: 5%; width: auto; max-width: 1200px; top: 20%; margin-inline: auto; }
+.kiwi-catalog .sw-copy__title { font-size: 36px; line-height: 40px; max-width: 100%; }
+.kiwi-catalog .sw-copy__body { max-width: 100%; margin-top: 12px; }
+.catalog-note { font-size: 12px; margin-top: 8px; }
+.book-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 24px; margin-top: 24px; }
+.book-card { display: block; color: #15382a; text-decoration: none; padding: 16px; border-radius: 16px; background: #faf7f2f5; transition: transform 500ms cubic-bezier(.22,1,.36,1); }
+.book-card:hover { transform: translateY(-4px); }
+.book-card:active { transform: scale(.98); }
+.book-cover { aspect-ratio: 3/3.5; display: flex; flex-direction: column; justify-content: space-between; padding: 16px; border-radius: 4px; box-shadow: inset 4px 0 #0002; }
+.book-cover span { font-size: 12px; }
+.book-cover strong { font-size: 24px; line-height: 32px; font-weight: 600; text-wrap: balance; }
+.book-cover--sage { background: #d6dfbd; }
+.book-cover--sand { background: #e7d6b5; }
+.book-cover--pine { background: #214c3a; color: #faf7f2; }
+.book-cover--rose { background: #e6c9bf; }
+.book-genre { display: block; margin-top: 12px; font-size: 12px; }
+.book-card h3 { margin: 4px 0; font-size: 16px; line-height: 24px; font-weight: 600; }
+.book-card p { font-size: 14px; line-height: 20px; margin: 0; }
+.book-link { display: block; margin-top: 12px; font-size: 14px; font-weight: 600; }
+.catalog-link { display: inline-block; margin-top: 16px; padding: 8px 12px; border-radius: 8px; color: #fff; background: #15382a; }
+.sw-copylayer::after { content: ''; position: absolute; inset: 0; background: #faf7f2bd; opacity: var(--catalog-reveal, 0); pointer-events: none; }
+.sw-copy { z-index: 1; }
+.catalog-details { position: relative; z-index: 25; padding: 80px 5%; background: #faf7f2; color: #15382a; }
+.catalog-details h2 { font-size: 36px; line-height: 40px; font-weight: 600; }
+.catalog-details > p { max-width: 680px; margin: 16px 0 32px; }
+.catalog-details article { padding: 24px; margin-bottom: 16px; border: 1px solid #d6dfbd; border-radius: 16px; scroll-margin-top: 128px; }
+.catalog-details h3 { font-size: 24px; line-height: 32px; }
+.catalog-details a { display: inline-block; margin-top: 12px; text-decoration: underline; }
+#catalogo { scroll-margin-top: 128px; }
+@media (max-width:860px) {
+ .kiwi-catalog { left: 24px; right: 24px; top: 112px; bottom: auto; max-height: calc(100dvh - 144px); overflow-y: auto; padding: 4px; }
+ .kiwi-catalog .sw-copy__title { font-size: 30px; line-height: 36px; }
+ .book-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; margin-top: 16px; }
+ .book-card { padding: 12px; }
+ .book-cover { padding: 12px; }
+ .book-cover strong { font-size: 18px; line-height: 28px; }
+ .book-cover span { font-size: 12px; }
+}
+@media (max-height:800px) and (min-width:861px) {
+ .kiwi-catalog { top: 144px; max-height: calc(100dvh - 160px); overflow-y: auto; padding: 4px; }
+ .book-cover { aspect-ratio: 3/2.4; }
+}
+@media (prefers-reduced-motion:reduce) { .book-card { transition: none; } .book-card:hover { transform: none; } }
