@@ -45,6 +45,20 @@ Las dos carpetas tienen funciones distintas y deben mantenerse separadas:
 
 No hace falta Node en Namecheap: GitHub compila la web. No cambiar Document Root a la raiz del repositorio. La preparacion de `hosting` es automatica; para publicar en el servidor con este metodo hace falta Update from Remote + Deploy HEAD Commit. La clonacion por si sola no activa actualizaciones automaticas desde GitHub. Para automatizar tambien el servidor hay que configurar FTPS (abajo), o acceso SSH/una tarea cron de despliegue en cPanel.
 
+### Automatizar cPanel con Cron Jobs
+
+1. Con `hosting` seleccionada en cPanel, pulsa Update from Remote y Deploy HEAD Commit una vez para obtener el script nuevo.
+2. Abre cPanel > Cron Jobs y crea una tarea con minuto `*/5`, hora `*`, dia `*`, mes `*` y dia de semana `*` (cada cinco minutos).
+3. En Command pega:
+
+```bash
+/bin/bash /home/metrdpex/repositories/kiwi_biblioteca/sync-hosting.sh >> /home/metrdpex/kiwi-deploy.log 2>&1
+```
+
+El script trae `hosting` desde GitHub y solicita el despliegue a cPanel solo si el commit es distinto al ultimo publicado correctamente. Un bloqueo evita dos sincronizaciones simultaneas. La marca `.kiwi-deployed-sha` se guarda fuera del repositorio solo despues de copiar todos los archivos. Los errores quedan en `/home/metrdpex/kiwi-deploy.log`; un despliegue fallido se reintenta en la proxima ejecucion. Se necesita que cPanel permita ejecutar Git y UAPI desde cron; si el acceso Shell esta deshabilitado y el registro indica restricciones, habilitarlo en Manage Shell.
+
+Flujo: push a `main` > GitHub Actions genera `hosting` > cron detecta la version nueva > cPanel publica el sitio. El tiempo es la compilacion de GitHub mas hasta cinco minutos de espera y la duracion del despliegue. No configurar FTPS simultaneamente con esta tarea. Namecheap no permite intervalos menores a cinco minutos en hosting compartido.
+
 ### FTPS opcional para publicacion automatica al servidor
 
 Si no hay secrets FTP, el workflow termina correctamente tras preparar `hosting` y omite FTPS. Si configuras los cuatro secrets, cada push a `main` tambien publica directamente en Namecheap. No configurar ambos metodos para escribir al sitio simultaneamente.

@@ -24,6 +24,7 @@ fi
 
 cp -R dist/. "$site_dir/"
 cp .github/cpanel/deploy.yml "$site_dir/.cpanel.yml"
+cp .github/cpanel/sync-hosting.sh "$site_dir/sync-hosting.sh"
 printf 'Compiled website for cPanel. Source branch: main.\n' > "$site_dir/.hosting-build"
 git -C "$site_dir" add --all
 if git -C "$site_dir" diff --cached --quiet; then
